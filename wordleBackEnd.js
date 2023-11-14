@@ -1,28 +1,40 @@
+let submitButton = document.getElementById("submitButton");
+let wordInput = document.getElementById("wordInput");
+let currentWord = document.getElementById("currentWord");
+
 let word = "apple";
+let predefArr = word.split('');
+
 let guessWord;
-let priorWord1;
-let priorWord2;
-let priorWord3;
-let priorWord4;
+let priorWord1 = document.getElementById("priorWord1");
+let priorWord2 = document.getElementById("priorWord2");
+let priorWord3 = document.getElementById("priorWord3");
+let priorWord4 = document.getElementById("priorWord4");
+let holderWord;
+let newText = "";
 
-
-document.getElementById("submitButton").onclick = function()
+submitButton.onclick = function()
 {
-   guessWord = document.getElementById("wordInput").value;
+   guessWord = wordInput.value;
    //console.log(guessWord);
-   firstWord(guessWord);
+   wordGuess(guessWord);
 }
 
-function firstWord(guessWord)
+function wordGuess(guessWord)
 {
-    document.getElementById("currentWord").innerHTML = guessWord;
+    currentWord.innerHTML = guessWord;
+    compare = (predef,word) => {
+        return word
+               .split('')
+               .map( (letter,i) => {
+                 if (predef[i] === letter) return '<span style="color:green">'+guessWord.charAt(i)+'</span>';
+                 if (predef.includes(letter)) return '<span style="color:yellow">'+guessWord.charAt(i)+'</span>';
+                 return guessWord.charAt(i)
+               });
+        
+      }
+      result = compare(predefArr, guessWord).join("");
+      console.log(result);
+      currentWord.innerHTML = result.toString();
 
-switch(document.getElementById("currentWord").innerHTML.charAt(0) == word.charAt(0))
-{
-    case document.getElementById("currentWord").innerHTML.charAt(0) == word.charAt(0):
-        console.log("yup");
-        document.getElementById("currentWord").innerHTML = document.getElementById("currentWord").innerHTML.replace(document.getElementById("currentWord").innerHTML.charAt(0),  '<span style="color: green;">'+word.charAt(0)+'</span>');
-    break;
 }
-}
-
