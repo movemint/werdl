@@ -12,12 +12,23 @@ let priorWord3 = document.getElementById("priorWord3");
 let priorWord4 = document.getElementById("priorWord4");
 let holderWord;
 let newText = "";
+let tryamount = 0;
+let compareText;
 
 submitButton.onclick = function()
 {
    guessWord = wordInput.value;
    //console.log(guessWord);
-   wordGuess(guessWord);
+   if(guessWord.length == 5){
+    priorWord4.innerHTML = priorWord3.innerHTML;
+    priorWord3.innerHTML = priorWord2.innerHTML;
+    priorWord2.innerHTML = priorWord1.innerHTML;
+    priorWord1.innerHTML = currentWord.innerHTML;
+    wordGuess(guessWord);
+   } else 
+   {
+    alert("you're so fuckin stupid type a 5 letter word dumbass have u not played werdl before");
+   }
 }
 
 function wordGuess(guessWord)
@@ -35,6 +46,19 @@ function wordGuess(guessWord)
       }
       result = compare(predefArr, guessWord).join("");
       console.log(result);
+      compareText = result.toString();
       currentWord.innerHTML = result.toString();
+      tryamount += 1;
+      console.log(tryamount);
 
+      if(tryamount > 5)
+      {
+        loseScreen();
+      }
+}
+
+function loseScreen()
+{
+alert("you fucking suck im bored im gonna kill you bye you lose");
+tryamount = 0;
 }
